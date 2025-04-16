@@ -1,18 +1,20 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useCalculator } from '@/context/CalculatorContext';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Info } from 'lucide-react';
 import * as calculations from '@/utils/calculations';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface InputField {
   id: string;
   label: string;
   unit: string;
   placeholder: string;
+  defaultValue?: string;
+  tooltip?: string;
 }
 
 const Calculator: React.FC = () => {
@@ -59,22 +61,64 @@ const Calculator: React.FC = () => {
     switch (calculationType) {
       // Quantum Physics
       case 'f': return [
-        { id: 'pc', label: 'Planck\'s constant', unit: 'J.s', placeholder: '6.63e-34' },
-        { id: 'mfe', label: 'Mass of electron/proton', unit: 'kg', placeholder: '9.11e-31' },
-        { id: 'sl', label: 'Speed of light', unit: 'm/s', placeholder: '3e8' },
+        { 
+          id: 'pc', 
+          label: 'Planck\'s constant', 
+          unit: 'J.s', 
+          placeholder: '6.63e-34',
+          defaultValue: '6.63e-34',
+          tooltip: 'Universal physical constant'
+        },
+        { 
+          id: 'mfe', 
+          label: 'Mass of electron/proton', 
+          unit: 'kg', 
+          placeholder: '9.11e-31',
+          defaultValue: '9.11e-31',
+          tooltip: 'Mass of electron'
+        },
+        { 
+          id: 'sl', 
+          label: 'Speed of light', 
+          unit: 'm/s', 
+          placeholder: '3e8',
+          defaultValue: '3e8',
+          tooltip: 'Speed of light in vacuum'
+        },
       ];
       case 'g': return [
-        { id: 'pc', label: 'Planck\'s constant', unit: 'J.s', placeholder: '6.63e-34' },
-        { id: 'mfp', label: 'Mass of the particle', unit: 'kg', placeholder: '9.11e-31' },
-        { id: 'en', label: 'Energy of the particle', unit: 'J', placeholder: '1.6e-19' },
+        { 
+          id: 'pc', 
+          label: 'Planck\'s constant', 
+          unit: 'J.s', 
+          placeholder: '6.63e-34',
+          defaultValue: '6.63e-34',
+          tooltip: 'Universal physical constant'
+        },
+        { 
+          id: 'mfp', 
+          label: 'Mass of the particle', 
+          unit: 'kg', 
+          placeholder: '9.11e-31',
+          defaultValue: '9.11e-31',
+          tooltip: 'For electron: 9.11e-31 kg'
+        },
+        { 
+          id: 'en', 
+          label: 'Energy of the particle', 
+          unit: 'J', 
+          placeholder: '1.6e-19',
+          defaultValue: '1.6e-19',
+          tooltip: 'Typical electron energy'
+        },
       ];
       case 'h': return [
-        { id: 'pc', label: 'Planck\'s constant', unit: 'J.s', placeholder: '6.63e-34' },
-        { id: 'mfp', label: 'Mass of the particle', unit: 'kg', placeholder: '9.11e-31' },
+        { id: 'pc', label: 'Planck\'s constant', unit: 'J.s', placeholder: '6.63e-34', defaultValue: '6.63e-34', tooltip: 'Universal physical constant' },
+        { id: 'mfp', label: 'Mass of the particle', unit: 'kg', placeholder: '9.11e-31', defaultValue: '9.11e-31', tooltip: 'For electron: 9.11e-31 kg' },
         { id: 'wl', label: 'Wavelength of the particle', unit: 'm', placeholder: '1e-10' },
       ];
       case 'i': return [
-        { id: 'pc', label: 'Planck\'s constant', unit: 'J.s', placeholder: '6.63e-34' },
+        { id: 'pc', label: 'Planck\'s constant', unit: 'J.s', placeholder: '6.63e-34', defaultValue: '6.63e-34', tooltip: 'Universal physical constant' },
         { id: 'wl', label: 'Wavelength of the particle', unit: 'm', placeholder: '1e-10' },
       ];
       
@@ -104,12 +148,12 @@ const Calculator: React.FC = () => {
       // Semiconductors
       case 'n': return [
         { id: 'eol', label: 'Electron occupying energy level', unit: 'J', placeholder: '1.6e-19' },
-        { id: 'kc', label: 'Boltzmann constant', unit: 'J/K', placeholder: '1.38e-23' },
+        { id: 'kc', label: 'Boltzmann constant', unit: 'J/K', placeholder: '1.38e-23', defaultValue: '1.38e-23', tooltip: 'Boltzmann Constant' },
         { id: 'tm', label: 'Temperature', unit: 'K', placeholder: '300' },
       ];
       case 'o': return [
         { id: 'fe', label: 'Fermi energy', unit: 'J', placeholder: '8.2e-19' },
-        { id: 'kc', label: 'Boltzmann constant', unit: 'J/K', placeholder: '1.38e-23' },
+        { id: 'kc', label: 'Boltzmann constant', unit: 'J/K', placeholder: '1.38e-23', defaultValue: '1.38e-23', tooltip: 'Boltzmann Constant' },
         { id: 'tm', label: 'Temperature', unit: 'K', placeholder: '300' },
         { id: 'eol', label: 'Probability of electron', unit: '', placeholder: '0.5' },
       ];
@@ -122,12 +166,12 @@ const Calculator: React.FC = () => {
         { id: 'bz', label: 'Magnetic field', unit: 'T', placeholder: '1.5' },
         { id: 'wi', label: 'Width of sample', unit: 'm', placeholder: '0.01' },
         { id: 'nc', label: 'Concentration of donor/acceptor atom', unit: '/m³', placeholder: '1e22' },
-        { id: 'ec', label: 'Charge of electron', unit: 'C', placeholder: '1.6e-19' },
+        { id: 'ec', label: 'Charge of electron', unit: 'C', placeholder: '1.6e-19', defaultValue: '1.6e-19', tooltip: 'Electron Charge' },
       ];
       case 'r': return [
         { id: 'mo', label: 'Mobility', unit: 'm²/V-sec', placeholder: '0.135' },
         { id: 're', label: 'Resistivity', unit: 'Ohm-m', placeholder: '2.3e-5' },
-        { id: 'ec', label: 'Charge of electron', unit: 'C', placeholder: '1.6e-19' },
+        { id: 'ec', label: 'Charge of electron', unit: 'C', placeholder: '1.6e-19', defaultValue: '1.6e-19', tooltip: 'Electron Charge' },
       ];
       
       // Interference in thin film
@@ -171,6 +215,18 @@ const Calculator: React.FC = () => {
     setInputValues((prev) => ({ ...prev, [id]: value }));
     setError(null);
   };
+
+  React.useEffect(() => {
+    // Pre-fill input values when fields change
+    const fields = getInputFields();
+    const defaultValues: Record<string, string> = {};
+    fields.forEach(field => {
+      if (field.defaultValue) {
+        defaultValues[field.id] = field.defaultValue;
+      }
+    });
+    setInputValues(defaultValues);
+  }, [calculationType]);
 
   const validateInputs = (): boolean => {
     const fields = getInputFields();
@@ -374,15 +430,30 @@ const Calculator: React.FC = () => {
       <CardContent className="space-y-6">
         {inputFields.map((field) => (
           <div key={field.id} className="space-y-2">
-            <Label htmlFor={field.id} className="text-secondary-color">
-              {field.label} {field.unit ? `(${field.unit})` : ''}:
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor={field.id} className="text-secondary-color">
+                {field.label} {field.unit ? `(${field.unit})` : ''}:
+              </Label>
+              {field.tooltip && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Info className="h-4 w-4 text-muted-foreground" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{field.tooltip}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+            </div>
             <Input
               id={field.id}
               placeholder={field.placeholder}
               value={inputValues[field.id] || ''}
               onChange={(e) => handleInputChange(field.id, e.target.value)}
               type="text"
+              className="font-mono"
             />
           </div>
         ))}
@@ -394,7 +465,7 @@ const Calculator: React.FC = () => {
         {result && (
           <div className="mt-6 p-4 bg-muted rounded-md">
             <p className="font-medium">Result:</p>
-            <p className="text-destructive-color text-xl font-semibold mt-2">{result}</p>
+            <p className="text-destructive-color text-xl font-semibold mt-2 font-mono">{result}</p>
           </div>
         )}
       </CardContent>
