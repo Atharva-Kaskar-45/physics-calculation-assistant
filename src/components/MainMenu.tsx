@@ -28,7 +28,7 @@ const MainMenu: React.FC = () => {
           <Button
             key={module.id}
             variant="outline"
-            className="w-full flex items-center justify-start text-secondary-color hover:text-secondary-color/80 h-auto py-2 md:py-3 px-2 md:px-4 text-sm md:text-base lg:text-lg font-medium border border-secondary hover:border-primary transition-all transform hover:scale-[1.02] hover:shadow-lg animate-fade-in overflow-hidden"
+            className="w-full flex items-start justify-start text-secondary-color hover:text-secondary-color/80 h-auto min-h-12 py-3 px-3 md:px-4 text-sm md:text-base lg:text-lg font-medium border border-secondary hover:border-primary transition-all transform hover:scale-[1.02] hover:shadow-lg animate-fade-in"
             style={{ 
               animationDelay: `${index * 150}ms`,
               opacity: 0,
@@ -36,10 +36,10 @@ const MainMenu: React.FC = () => {
             }}
             onClick={() => setModule(module.id as any)}
           >
-            <span className="mr-2 flex-shrink-0">
+            <span className="mr-2 flex-shrink-0 mt-0.5">
               {module.icon}
             </span>
-            <span className="truncate">
+            <span className="break-words whitespace-normal">
               {module.label}
             </span>
           </Button>
