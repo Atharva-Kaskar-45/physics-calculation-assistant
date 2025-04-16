@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useCalculator } from '@/context/CalculatorContext';
@@ -6,7 +5,7 @@ import { ChevronLeft } from 'lucide-react';
 
 const TopicMenu: React.FC = () => {
   const { module, setModule, setCalculationType, setResult } = useCalculator();
-
+  
   // Define module options
   const moduleOptions: Record<string, { id: string; label: string }[]> = {
     a: [
@@ -39,7 +38,7 @@ const TopicMenu: React.FC = () => {
       { id: 'x', label: 'Calculate critical magnetic field' },
     ],
   };
-
+  
   // Get module title
   const getModuleTitle = () => {
     switch (module) {
@@ -51,46 +50,47 @@ const TopicMenu: React.FC = () => {
       default: return '';
     }
   };
-
+  
   // Handle going back to main menu
   const handleBackToMainMenu = () => {
     setModule(null);
     setResult(null); // Clear result when going back to main menu
   };
-
+  
   // Handle calculation type selection
   const handleCalculationTypeSelect = (calcType: string) => {
     setCalculationType(calcType as any);
     setResult(null); // Clear result when selecting a new calculation
   };
-
+  
   if (!module) return null;
-
+  
   const options = moduleOptions[module] || [];
-
+  
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 px-4 w-full max-w-full">
       <div className="flex items-center mb-6">
         <Button 
           variant="outline" 
           size="icon" 
           onClick={handleBackToMainMenu}
-          className="mr-2"
+          className="mr-2 h-8 w-8 md:h-10 md:w-10"
         >
-          <ChevronLeft className="h-5 w-5" />
+          <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
         </Button>
-        <h2 className="text-accent-color text-xl">{getModuleTitle()}</h2>
+        <h2 className="text-accent-color text-lg md:text-xl truncate">{getModuleTitle()}</h2>
       </div>
-
-      <div className="grid gap-4">
+      <div className="grid gap-4 w-full">
         {options.map((option) => (
           <Button
             key={option.id}
             variant="outline"
-            className="flex items-center justify-start text-secondary-color hover:text-secondary-color/80 h-14 text-lg font-normal text-left border border-secondary hover:border-primary transition-all"
+            className="w-full flex items-center justify-start text-secondary-color hover:text-secondary-color/80 h-auto py-2 md:py-3 px-2 md:px-4 text-sm md:text-base lg:text-lg font-normal text-left border border-secondary hover:border-primary transition-all overflow-hidden"
             onClick={() => handleCalculationTypeSelect(option.id)}
           >
-            {option.label}
+            <span className="truncate">
+              {option.label}
+            </span>
           </Button>
         ))}
       </div>
