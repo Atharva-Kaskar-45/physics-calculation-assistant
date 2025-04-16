@@ -13,22 +13,22 @@ const MainMenu: React.FC = () => {
   const { setModule } = useCalculator();
   
   const modules = [
-    { id: 'a', label: 'Quantum Physics', icon: <Atom className="h-5 w-5" /> },
-    { id: 'b', label: 'Crystallography', icon: <Hexagon className="h-5 w-5" /> },
-    { id: 'c', label: 'Semiconductors', icon: <Cpu className="h-5 w-5" /> },
-    { id: 'd', label: 'Interference in thin film', icon: <Layers className="h-5 w-5" /> },
-    { id: 'e', label: 'Superconductors and Supercapacitors', icon: <Zap className="h-5 w-5" /> },
+    { id: 'a', label: 'Quantum Physics', icon: <Atom className="h-4 w-4 md:h-5 md:w-5" /> },
+    { id: 'b', label: 'Crystallography', icon: <Hexagon className="h-4 w-4 md:h-5 md:w-5" /> },
+    { id: 'c', label: 'Semiconductors', icon: <Cpu className="h-4 w-4 md:h-5 md:w-5" /> },
+    { id: 'd', label: 'Interference in thin film', icon: <Layers className="h-4 w-4 md:h-5 md:w-5" /> },
+    { id: 'e', label: 'Superconductors and Supercapacitors', icon: <Zap className="h-4 w-4 md:h-5 md:w-5" /> },
   ];
   
   return (
-    <div className="space-y-6 animate-fade-in px-2 sm:px-0">
-      <h2 className="text-accent-color text-xl font-medium mb-4 animate-slide-in-right">Select any module:</h2>
-      <div className="grid gap-4">
+    <div className="space-y-6 animate-fade-in px-4 w-full max-w-full">
+      <h2 className="text-accent-color text-lg md:text-xl font-medium mb-4 animate-slide-in-right">Select any module:</h2>
+      <div className="grid gap-4 w-full">
         {modules.map((module, index) => (
           <Button
             key={module.id}
             variant="outline"
-            className="flex items-center justify-start text-secondary-color hover:text-secondary-color/80 h-auto min-h-14 py-3 text-base sm:text-lg font-medium border-2 border-secondary hover:border-primary transition-all transform hover:scale-[1.02] hover:shadow-lg animate-fade-in"
+            className="w-full flex items-center justify-start text-secondary-color hover:text-secondary-color/80 h-auto py-2 md:py-3 px-2 md:px-4 text-sm md:text-base lg:text-lg font-medium border border-secondary hover:border-primary transition-all transform hover:scale-[1.02] hover:shadow-lg animate-fade-in overflow-hidden"
             style={{ 
               animationDelay: `${index * 150}ms`,
               opacity: 0,
@@ -39,7 +39,7 @@ const MainMenu: React.FC = () => {
             <span className="mr-2 flex-shrink-0">
               {module.icon}
             </span>
-            <span className="truncate text-left break-words">
+            <span className="truncate">
               {module.label}
             </span>
           </Button>
