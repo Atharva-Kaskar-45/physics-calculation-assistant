@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           {children}
         </main>
         <footer className="mt-8 text-center text-sm text-muted-foreground animate-fade-in" style={{ animationDelay: '400ms' }}>
-          <h5>Made with ❤️ by Atharva Kaskar</h5>
+          <h4>Made with ❤️ by Atharva Kaskar</h4>
             <div className="flex justify-center gap-4">
     <a
       href="https://github.com/Atharva-Kaskar-45"
@@ -38,7 +38,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <b>LinkedIn</b>
     </a>
   </div>
-          <p class="mt-2">© 2025 Physics Calculation Assistant</p>
+          <p class="mt-4">© 2025 Physics Calculation Assistant</p>
         </footer>
       </div>
     </div>
