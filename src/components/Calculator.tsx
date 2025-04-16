@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -217,14 +216,12 @@ const Calculator: React.FC = () => {
     setError(null);
   };
 
-  // Clear result when returning to topic menu
   const handleBackToTopicMenu = () => {
     setCalculationType(null);
     setResult(null);
   };
 
   React.useEffect(() => {
-    // Pre-fill input values when fields change
     const fields = getInputFields();
     const defaultValues: Record<string, string> = {};
     fields.forEach(field => {
@@ -234,7 +231,6 @@ const Calculator: React.FC = () => {
     });
     setInputValues(defaultValues);
     
-    // Clear any previous errors when calculation type changes
     setError(null);
   }, [calculationType]);
 
@@ -256,15 +252,12 @@ const Calculator: React.FC = () => {
     try {
       let calculationResult = '';
 
-      // Convert input values to numbers
       const numericValues: Record<string, number> = {};
       Object.entries(inputValues).forEach(([key, value]) => {
         numericValues[key] = parseFloat(value);
       });
 
-      // Perform the calculation based on the type
       switch (calculationType) {
-        // Quantum Physics
         case 'f':
           calculationResult = calculations.calculateDeBroglieWavelength(
             numericValues.pc,
@@ -293,7 +286,6 @@ const Calculator: React.FC = () => {
           );
           break;
           
-        // Crystallography
         case 'j':
           calculationResult = calculations.calculateInterplanarDistance(
             numericValues.lc,
@@ -324,7 +316,6 @@ const Calculator: React.FC = () => {
           );
           break;
           
-        // Semiconductors
         case 'n':
           calculationResult = calculations.calculateElectronProbability(
             numericValues.eol,
@@ -363,7 +354,6 @@ const Calculator: React.FC = () => {
           );
           break;
           
-        // Interference in thin film
         case 's':
           calculationResult = calculations.calculateFilmThickness(
             numericValues.wl,
@@ -392,7 +382,6 @@ const Calculator: React.FC = () => {
           );
           break;
           
-        // Superconductors
         case 'w':
           calculationResult = calculations.calculateCriticalTemperature(
             numericValues.tm,
@@ -423,14 +412,14 @@ const Calculator: React.FC = () => {
   const inputFields = getInputFields();
 
   return (
-    <Card className="w-full">
+    <Card className="w-full transform transition-all duration-300 hover:shadow-lg animate-scale-up">
       <CardHeader>
         <div className="flex items-center">
           <Button 
             variant="outline" 
             size="icon" 
             onClick={handleBackToTopicMenu}
-            className="mr-2"
+            className="mr-2 transition-transform hover:scale-105"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
@@ -438,8 +427,12 @@ const Calculator: React.FC = () => {
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
-        {inputFields.map((field) => (
-          <div key={field.id} className="space-y-2">
+        {inputFields.map((field, index) => (
+          <div 
+            key={field.id} 
+            className="space-y-2 animate-fade-in"
+            style={{ animationDelay: `${index * 100}ms` }}
+          >
             <div className="flex items-center gap-2">
               <Label htmlFor={field.id} className="text-secondary-color">
                 {field.label} {field.unit ? `(${field.unit})` : ''}:
@@ -469,11 +462,11 @@ const Calculator: React.FC = () => {
         ))}
 
         {error && (
-          <div className="text-destructive font-medium text-sm mt-2">{error}</div>
+          <div className="text-destructive font-medium text-sm mt-2 animate-fade-in">{error}</div>
         )}
 
         {result && (
-          <div className="mt-6 p-4 bg-muted rounded-md">
+          <div className="mt-6 p-4 bg-muted rounded-md animate-scale-up">
             <p className="font-medium">Result:</p>
             <p className="text-destructive-color text-xl font-semibold mt-2 font-mono">{result}</p>
           </div>
@@ -481,7 +474,7 @@ const Calculator: React.FC = () => {
       </CardContent>
       <CardFooter>
         <Button 
-          className="w-full"
+          className="w-full transform transition-all duration-300 hover:scale-[1.02] hover:shadow-md"
           onClick={performCalculation}
         >
           Calculate
