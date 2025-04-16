@@ -69,11 +69,11 @@ Node.js (version 14 or later)
 
 ## Screenshots
 
-<img src="images/Parkinsons_screenshot.png" alt="Parkinsons Prediction"/> <br>
+<img src="images/homepage.png" alt="Home Page"/> <br>
 
-<img src="images/Heart_screenshot.png" alt="Heart Disease Prediction"/>  <br>
+<img src="images/Subtopics.png" alt="Sub Topics"/>  <br>
 
-<img src="images/Diabetes_screenshot.png" alt="Diabetes Prediction"/>  <br>
+<img src="images/Result.png" alt="Result"/>  <br>
 
 ## Contributing 🧑‍💻
 We welcome contributions to improve Sehat AI! To contribute, follow these steps:
