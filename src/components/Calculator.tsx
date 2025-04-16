@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -216,6 +217,12 @@ const Calculator: React.FC = () => {
     setError(null);
   };
 
+  // Clear result when returning to topic menu
+  const handleBackToTopicMenu = () => {
+    setCalculationType(null);
+    setResult(null);
+  };
+
   React.useEffect(() => {
     // Pre-fill input values when fields change
     const fields = getInputFields();
@@ -226,6 +233,9 @@ const Calculator: React.FC = () => {
       }
     });
     setInputValues(defaultValues);
+    
+    // Clear any previous errors when calculation type changes
+    setError(null);
   }, [calculationType]);
 
   const validateInputs = (): boolean => {
@@ -419,7 +429,7 @@ const Calculator: React.FC = () => {
           <Button 
             variant="outline" 
             size="icon" 
-            onClick={() => setCalculationType(null)}
+            onClick={handleBackToTopicMenu}
             className="mr-2"
           >
             <ChevronLeft className="h-5 w-5" />

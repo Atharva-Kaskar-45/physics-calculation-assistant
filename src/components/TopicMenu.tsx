@@ -5,7 +5,7 @@ import { useCalculator } from '@/context/CalculatorContext';
 import { ChevronLeft } from 'lucide-react';
 
 const TopicMenu: React.FC = () => {
-  const { module, setModule, setCalculationType } = useCalculator();
+  const { module, setModule, setCalculationType, setResult } = useCalculator();
 
   // Define module options
   const moduleOptions: Record<string, { id: string; label: string }[]> = {
@@ -52,6 +52,18 @@ const TopicMenu: React.FC = () => {
     }
   };
 
+  // Handle going back to main menu
+  const handleBackToMainMenu = () => {
+    setModule(null);
+    setResult(null); // Clear result when going back to main menu
+  };
+
+  // Handle calculation type selection
+  const handleCalculationTypeSelect = (calcType: string) => {
+    setCalculationType(calcType as any);
+    setResult(null); // Clear result when selecting a new calculation
+  };
+
   if (!module) return null;
 
   const options = moduleOptions[module] || [];
@@ -62,7 +74,7 @@ const TopicMenu: React.FC = () => {
         <Button 
           variant="outline" 
           size="icon" 
-          onClick={() => setModule(null)}
+          onClick={handleBackToMainMenu}
           className="mr-2"
         >
           <ChevronLeft className="h-5 w-5" />
@@ -76,7 +88,7 @@ const TopicMenu: React.FC = () => {
             key={option.id}
             variant="outline"
             className="flex items-center justify-start text-secondary-color hover:text-secondary-color/80 h-14 text-lg font-normal text-left border border-secondary hover:border-primary transition-all"
-            onClick={() => setCalculationType(option.id as any)}
+            onClick={() => handleCalculationTypeSelect(option.id)}
           >
             {option.label}
           </Button>

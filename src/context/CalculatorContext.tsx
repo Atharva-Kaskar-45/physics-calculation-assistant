@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type ModuleType = 'a' | 'b' | 'c' | 'd' | 'e' | null;
 type CalculationType = 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | null;
@@ -20,6 +20,12 @@ export const CalculatorProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const [module, setModule] = useState<ModuleType>(null);
   const [calculationType, setCalculationType] = useState<CalculationType>(null);
   const [result, setResult] = useState<string | null>(null);
+
+  // Reset result when calculation type changes
+  useEffect(() => {
+    // Clear the result whenever the calculation type changes
+    setResult(null);
+  }, [calculationType]);
 
   const resetCalculator = () => {
     setModule(null);
