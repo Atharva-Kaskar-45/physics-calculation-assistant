@@ -19,8 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           {children}
         </main>
         <footer className="mt-8 text-center text-sm text-muted-foreground animate-fade-in" style={{ animationDelay: '400ms' }}>
-          <p>© 2025 Physics Calculation Assistant</p>
-          <p>Made with ❤️ by Atharva Kaskar</p>
+          <h5>Made with ❤️ by Atharva Kaskar</h5>
             <div className="flex justify-center gap-4">
     <a
       href="https://github.com/Atharva-Kaskar-45"
@@ -28,7 +27,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       rel="noopener noreferrer"
       className="hover:text-primary transition-colors"
     >
-      GitHub
+      <b>GitHub</b>
     </a>
     <a
       href="https://www.linkedin.com/in/atharva-kaskar-00114324a/"
@@ -36,9 +35,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       rel="noopener noreferrer"
       className="hover:text-primary transition-colors"
     >
-      LinkedIn
+      <b>LinkedIn</b>
     </a>
   </div>
+          <p class="mt-2">© 2025 Physics Calculation Assistant</p>
         </footer>
       </div>
     </div>
