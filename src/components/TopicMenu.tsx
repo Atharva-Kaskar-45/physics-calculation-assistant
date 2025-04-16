@@ -68,8 +68,8 @@ const TopicMenu: React.FC = () => {
   const options = moduleOptions[module] || [];
   
   return (
-    <div className="space-y-6 px-4 w-full max-w-full">
-      <div className="flex items-center mb-6">
+    <div className="space-y-6 px-4 w-full max-w-full animate-fade-in">
+      <div className="flex items-center mb-6 animate-slide-in-right">
         <Button 
           variant="outline" 
           size="icon" 
@@ -81,11 +81,16 @@ const TopicMenu: React.FC = () => {
         <h2 className="text-accent-color text-lg md:text-xl break-words">{getModuleTitle()}</h2>
       </div>
       <div className="grid gap-4 w-full">
-        {options.map((option) => (
+        {options.map((option, index) => (
           <Button
             key={option.id}
             variant="outline"
-            className="w-full flex items-start justify-start text-secondary-color hover:text-secondary-color/80 h-auto min-h-12 py-3 px-3 md:px-4 text-sm md:text-base lg:text-lg font-normal text-left border border-secondary hover:border-primary transition-all"
+            className="w-full flex items-start justify-start text-secondary-color hover:text-secondary-color/80 h-auto min-h-12 py-3 px-3 md:px-4 text-sm md:text-base lg:text-lg font-normal text-left border border-secondary hover:border-primary transition-all transform hover:scale-[1.02] hover:shadow-lg animate-fade-in"
+            style={{ 
+              animationDelay: `${index * 150}ms`,
+              opacity: 0,
+              animation: `fade-in 0.5s ease-out ${index * 150}ms forwards, slide-in-right 0.5s ease-out ${index * 150}ms forwards`
+            }}
             onClick={() => handleCalculationTypeSelect(option.id)}
           >
             <span className="break-words whitespace-normal">
