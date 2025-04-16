@@ -24,7 +24,7 @@ const MainMenu: React.FC = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <h2 className="text-accent-color text-xl font-medium mb-4 animate-slide-in-right">Select any module:</h2>
-      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+      <div className="grid gap-4">
         {modules.map((module, index) => (
           <Button
             key={module.id}
