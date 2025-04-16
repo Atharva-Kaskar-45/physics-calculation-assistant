@@ -74,21 +74,21 @@ const TopicMenu: React.FC = () => {
           variant="outline" 
           size="icon" 
           onClick={handleBackToMainMenu}
-          className="mr-2 h-8 w-8 md:h-10 md:w-10"
+          className="mr-2 h-8 w-8 md:h-10 md:w-10 flex-shrink-0"
         >
           <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
         </Button>
-        <h2 className="text-accent-color text-lg md:text-xl truncate">{getModuleTitle()}</h2>
+        <h2 className="text-accent-color text-lg md:text-xl break-words">{getModuleTitle()}</h2>
       </div>
       <div className="grid gap-4 w-full">
         {options.map((option) => (
           <Button
             key={option.id}
             variant="outline"
-            className="w-full flex items-center justify-start text-secondary-color hover:text-secondary-color/80 h-auto py-2 md:py-3 px-2 md:px-4 text-sm md:text-base lg:text-lg font-normal text-left border border-secondary hover:border-primary transition-all overflow-hidden"
+            className="w-full flex items-start justify-start text-secondary-color hover:text-secondary-color/80 h-auto min-h-12 py-3 px-3 md:px-4 text-sm md:text-base lg:text-lg font-normal text-left border border-secondary hover:border-primary transition-all"
             onClick={() => handleCalculationTypeSelect(option.id)}
           >
-            <span className="truncate">
+            <span className="break-words whitespace-normal">
               {option.label}
             </span>
           </Button>
